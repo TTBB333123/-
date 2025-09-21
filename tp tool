@@ -1,0 +1,112 @@
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+   Name = "텔레포트 툴",
+   Icon = 0, 
+   LoadingTitle = "로딩중...",
+   LoadingSubtitle = "제작자:TTBB333123",
+   Theme = "Serenity", 
+
+   DisableRayfieldPrompts = false,
+   DisableBuildWarnings = false, 
+
+   ConfigurationSaving = {
+      Enabled = false,
+      FolderName = nil, 
+      FileName = "ROHCHAN HUB"
+   },
+
+   Discord = {
+      Enabled = true, 
+      Invite = "https://discord.gg/XGUHWasueM", 
+      RememberJoins = true 
+   },
+
+   KeySystem = false, 
+   KeySettings = {
+      Title = " KEY System",
+      Subtitle = "디스코드로 오셔서 키를 받아가세요",
+      Note = "서버에 가입하시면 업데이트 버전의 허브를 받을 수 있습니다.", 
+      FileName = "Key", 
+      SaveKey = true, 
+      GrabKeyFromSite = true, 
+      Key = {"https://pastebin.com/raw/U9WNzp9C"} 
+   }
+})
+
+local TPTab = Window:CreateTab("텔레포트 |📍", nil) -- Title, Image
+local TPSection = TPTab:CreateSection("저장")
+
+-- 위치 저장 변수 (2개 슬롯)
+local savedPosition1 = nil
+local savedPosition2 = nil
+
+-- 1번 위치 저장 버튼
+local SaveButton1 = TPTab:CreateButton({
+   Name = "1번 위치 저장",
+   Callback = function()
+      local player = game.Players.LocalPlayer
+      if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+         savedPosition1 = player.Character.HumanoidRootPart.Position
+         print("1번 위치가 저장되었습니다: " .. tostring(savedPosition1))
+      else
+         warn("캐릭터 또는 HumanoidRootPart를 찾을 수 없습니다.")
+      end
+   end,
+})
+
+-- 2번 위치 저장 버튼
+local SaveButton2 = TPTab:CreateButton({
+   Name = "2번 위치 저장",
+   Callback = function()
+      local player = game.Players.LocalPlayer
+      if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+         savedPosition2 = player.Character.HumanoidRootPart.Position
+         print("2번 위치가 저장되었습니다: " .. tostring(savedPosition2))
+      else
+         warn("캐릭터 또는 HumanoidRootPart를 찾을 수 없습니다.")
+      end
+   end,
+})
+
+
+
+local TPSection = TPTab:CreateSection("저장")
+
+-- 1번 위치로 이동 버튼
+local TeleportButton1 = TPTab:CreateButton({
+   Name = "1번 위치로 이동",
+   Callback = function()
+      local player = game.Players.LocalPlayer
+      if savedPosition1 then
+         if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+            player.Character.HumanoidRootPart.CFrame = CFrame.new(savedPosition1)
+            print("1번 위치로 텔레포트했습니다: " .. tostring(savedPosition1))
+         else
+            warn("캐릭터 또는 HumanoidRootPart를 찾을 수 없습니다.")
+         end
+      else
+         warn("1번 위치가 저장되지 않았습니다.")
+      end
+   end,
+})
+
+-- 2번 위치로 이동 버튼
+local TeleportButton2 = TPTab:CreateButton({
+   Name = "2번 위치로 이동",
+   Callback = function()
+      local player = game.Players.LocalPlayer
+      if savedPosition2 then
+         if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+            player.Character.HumanoidRootPart.CFrame = CFrame.new(savedPosition2)
+            print("2번 위치로 텔레포트했습니다: " .. tostring(savedPosition2))
+         else
+            warn("캐릭터 또는 HumanoidRootPart를 찾을 수 없습니다.")
+         end
+      else
+         warn("2번 위치가 저장되지 않았습니다.")
+      end
+   end,
+})
+
+
